@@ -106,7 +106,11 @@ void RGBmatrixPanel::init(uint8_t rows, uint8_t a, uint8_t b, uint8_t c,
   ) {
 #if defined(ARDUINO_ARCH_SAMD) || defined(ARDUINO_ARCH_ESP32)
   // R1, G1, B1, R2, G2, B2 pins
-  static const uint8_t defaultrgbpins[] = { 2,3,4,5,6,7 };
+  #if defined(ADAFRUIT_GRAND_CENTRAL_M4)
+    static const uint8_t defaultrgbpins[] = { 32,33,34,35,36,37 };
+  #else
+   static const uint8_t defaultrgbpins[] = { 2,3,4,5,6,7 };
+  #endif
   memcpy(rgbpins, pinlist ? pinlist : defaultrgbpins, sizeof rgbpins);
 #if defined(ARDUINO_ARCH_SAMD)
   // All six RGB pins MUST be on the same PORT # as CLK
